@@ -11,6 +11,10 @@ In order to be able to run the script first you need to run
 
 ### `npm install`
 
+
+## .ENV NEEDED!!
+
+In order to get personal token api, contact me at milanmiletic1996@gmail.com
 ## Available Scripts
 
 In the project directory, you can run:
