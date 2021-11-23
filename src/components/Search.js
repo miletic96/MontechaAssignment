@@ -12,7 +12,7 @@ const Search = () => {
     setUsername(e.target.value);
   };
   const headers = {
-    Authorization: "Token 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",
+    Authorization: "Token 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",
   };
   const userUrl = `https://api.github.com/users/${username}`;
   const starredUrl = `https://api.github.com/users/${username}/starred`;
@@ -40,6 +40,7 @@ const Search = () => {
 
     if (profileJson) {
       setData(profileJson);
+      console.log(repoJson.items);
       setRepositories(repoJson.items);
       setStarred(starredJson);
       setGists(gistsJson);

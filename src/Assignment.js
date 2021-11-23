@@ -14,7 +14,7 @@ const Assignment = () => {
     return String.fromCharCode(c.charCodeAt(0) + 1); // increment char code by 1
   };
   const submitHandler = () => {
-    var arrayOfLines = sequence.split("\n");
+    var arrayOfLines = sequence.toLowerCase().split("\n");
     let maxCharsX = 0; // max chars in a line
     for (let array in arrayOfLines) {
       // loop through each line to find the max chars
@@ -46,26 +46,31 @@ const Assignment = () => {
     console.table(matrixInput);
 
     const charMap = new Map();
+    let charArray = [];
+    let allchars = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
     let charToFind = "a"; 
     for (let i = 0; i < arrayOfLines.length; i++) {
       for (let j = 0; j < maxCharsX; j++) {
-        if (matrixInput[i][j] === charToFind) {
-          charMap.set(charToFind, [i, j]);
-          charToFind = nextChar(charToFind);
+        if (allchars.includes(matrixInput[i][j])) {
+          charMap.set(matrixInput[i][j], [i, j]);
+          charArray.push(matrixInput[i][j]);
         }
       }
     }
     console.log("Mapa");
-    console.log(charMap);
-    charToFind = "a";
-    do {
-      // nadji koordinate uzastopnih karaktera iz mape
-      let charToFindCoordinates = charMap.get(charToFind);
+    charArray = charArray.sort();
+    const iterator1 = charMap.keys();
+    console.log(charArray);
+
+    
+    for ( let k = 0; k<charArray.length; k++) {
+
+      let charToFindCoordinates = charMap.get(charArray[k]);
       if (typeof charToFindCoordinates != "undefined") { // proveri da li postoji taj karaker mapiran
         let charToFindLine = charToFindCoordinates[0];
         let charToFindColumn = charToFindCoordinates[1];
         let startPosition = [charToFindLine, charToFindColumn]; //koordinate karaktera od koga idemo na sledeci
-        let nextCharCoordinates = charMap.get(nextChar(charToFind));
+        let nextCharCoordinates = charMap.get(charArray[k+1]);
         if (typeof nextCharCoordinates != "undefined") {  // proveri da li postoji sledeci karaker mapiran
           let nextCharLine = nextCharCoordinates[0];
           let nextCharColumn = nextCharCoordinates[1];
@@ -153,7 +158,7 @@ const Assignment = () => {
         charToFind = nextChar(charToFind);
         console.log(charToFind);
       }
-    } while (charToFind != "a");
+}
     console.table(matrixOutput);
   };
   return (
