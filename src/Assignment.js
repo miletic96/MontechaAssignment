@@ -7,12 +7,7 @@ const Assignment = () => {
   const sequenceChangeHandler = (e) => {
     setSequence(e.target.value);
   };
-  const nextChar = (c) => {
-    if (c === "z") {
-      return "a";
-    }
-    return String.fromCharCode(c.charCodeAt(0) + 1); // increment char code by 1
-  };
+
   const submitHandler = () => {
     var arrayOfLines = sequence.toLowerCase().split("\n");
     let maxCharsX = 0; // max chars in a line
@@ -43,12 +38,38 @@ const Assignment = () => {
         matrixOutput[i][j] = temp[j];
       }
     }
-    console.table(matrixInput);
 
     const charMap = new Map();
     let charArray = [];
-    let allchars = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-    let charToFind = "a"; 
+    let allchars = [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "g",
+      "h",
+      "i",
+      "j",
+      "k",
+      "l",
+      "m",
+      "n",
+      "o",
+      "p",
+      "q",
+      "r",
+      "s",
+      "t",
+      "u",
+      "v",
+      "w",
+      "x",
+      "y",
+      "z",
+    ];
+    let charToFind = "a";
     for (let i = 0; i < arrayOfLines.length; i++) {
       for (let j = 0; j < maxCharsX; j++) {
         if (allchars.includes(matrixInput[i][j])) {
@@ -57,21 +78,17 @@ const Assignment = () => {
         }
       }
     }
-    console.log("Mapa");
     charArray = charArray.sort();
-    const iterator1 = charMap.keys();
-    console.log(charArray);
-
-    
-    for ( let k = 0; k<charArray.length; k++) {
-
+    for (let k = 0; k < charArray.length; k++) {
       let charToFindCoordinates = charMap.get(charArray[k]);
-      if (typeof charToFindCoordinates != "undefined") { // proveri da li postoji taj karaker mapiran
+      if (typeof charToFindCoordinates != "undefined") {
+        // proveri da li postoji taj karaker mapiran
         let charToFindLine = charToFindCoordinates[0];
         let charToFindColumn = charToFindCoordinates[1];
         let startPosition = [charToFindLine, charToFindColumn]; //koordinate karaktera od koga idemo na sledeci
-        let nextCharCoordinates = charMap.get(charArray[k+1]);
-        if (typeof nextCharCoordinates != "undefined") {  // proveri da li postoji sledeci karaker mapiran
+        let nextCharCoordinates = charMap.get(charArray[k + 1]);
+        if (typeof nextCharCoordinates != "undefined") {
+          // proveri da li postoji sledeci karaker mapiran
           let nextCharLine = nextCharCoordinates[0];
           let nextCharColumn = nextCharCoordinates[1];
           let endPosition = [nextCharLine, nextCharColumn]; // koordinate karaktera gde stajemo i krecemo sledeci put
@@ -81,7 +98,8 @@ const Assignment = () => {
           if (
             columnDifference == lineDifference ||
             columnDifference == lineDifference * -1
-          ) { //Proveravamo da li je distanca po x i y osi jednaka
+          ) {
+            //Proveravamo da li je distanca po x i y osi jednaka
             if (startPosition[0] < endPosition[0]) {
               if (startPosition[1] < endPosition[1]) {
                 let i = startPosition[0];
@@ -155,15 +173,21 @@ const Assignment = () => {
             }
           }
         }
-        charToFind = nextChar(charToFind);
-        console.log(charToFind);
       }
-}
-    console.table(matrixOutput);
+    }
+    let finalStringReturn = "";
+    for (let i = 0; i < arrayOfLines.length; i++) {
+      for (let j = 0; j < maxCharsX; j++) {
+        finalStringReturn = finalStringReturn + matrixOutput[i][j];
+      }
+      finalStringReturn = finalStringReturn + "\n";
+    }
+    document.getElementById("sequence").value = finalStringReturn;
   };
   return (
-    <>        <Navigation />
-
+    <>
+      {" "}
+      <Navigation />
       <div style={{ padding: 20 }}>
         <div className="ui ">
           <div className="ui input">
@@ -171,7 +195,10 @@ const Assignment = () => {
               className="prompt"
               placeholder="Enter sequence"
               type="textarea"
+              rows="30"
+              cols="30"
               value={sequence}
+              id="sequence"
               onChange={sequenceChangeHandler}
             >
               {" "}
