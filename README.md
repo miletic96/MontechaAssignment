@@ -5,6 +5,12 @@ Homepage is the page of profile,
 The Search page is where you can search users and see their github info.
 Assignment page is the page where you can test the first task.  
 
+## Setting up
+
+In order to be able to run the script first you need to run 
+
+### `npm install`
+
 ## Available Scripts
 
 In the project directory, you can run:
