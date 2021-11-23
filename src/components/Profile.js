@@ -10,7 +10,7 @@ const Profile = () => {
 
 
   const headers = {
-    Authorization: "Token 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",
+    Authorization: "Token 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",
   };
   const userUrl = `https://api.github.com/users/${username}`;
   const starredUrl = `https://api.github.com/users/${username}/starred`;
