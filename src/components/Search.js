@@ -12,7 +12,7 @@ const Search = () => {
     setUsername(e.target.value);
   };
   const headers = {
-    Authorization: "Token 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",
+    Authorization: "Token " + process.env.REACT_APP_GITHUB_TOKEN,
   };
   const userUrl = `https://api.github.com/users/${username}`;
   const starredUrl = `https://api.github.com/users/${username}/starred`;
@@ -27,11 +27,17 @@ const Search = () => {
     console.log(profileJson);
 
     // const repositories = await fetch(profileJson.repos_url, { method: "GET", headers: headers });
-    const repositories = await fetch(reposUrl, { method: "GET", headers: headers });
+    const repositories = await fetch(reposUrl, {
+      method: "GET",
+      headers: headers,
+    });
     const repoJson = await repositories.json();
     // console.log(repoJson);
 
-    const starred = await fetch(starredUrl, { method: "GET", headers: headers });
+    const starred = await fetch(starredUrl, {
+      method: "GET",
+      headers: headers,
+    });
     const starredJson = await starred.json();
 
     const gists = await fetch(gistsUrl, { method: "GET", headers: headers });
@@ -49,7 +55,6 @@ const Search = () => {
   return (
     <>
       <div style={{ padding: 20 }}>
-      
         <div className="ui search">
           <div className="ui icon input">
             <i className="search icon"></i>
@@ -70,7 +75,12 @@ const Search = () => {
             <i className="github icon"></i>
             Search
           </button>
-          <DisplayData data={data} repositories={repositories} starred={starred} gists={gists}/>
+          <DisplayData
+            data={data}
+            repositories={repositories}
+            starred={starred}
+            gists={gists}
+          />
         </div>
       </div>
     </>

@@ -4,6 +4,8 @@ import SearchUsers from "./SearchUsers";
 import Home from "./Home";
 import Assignment from './Assignment';
 import 'semantic-ui-css/semantic.min.css';
+require('dotenv').config();
+
 
 
 

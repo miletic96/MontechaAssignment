@@ -10,7 +10,7 @@ const Profile = () => {
 
 
   const headers = {
-    Authorization: "Token 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",
+    Authorization: "Token " + process.env.REACT_APP_GITHUB_TOKEN,
   };
   const userUrl = `https://api.github.com/users/${username}`;
   const starredUrl = `https://api.github.com/users/${username}/starred`;
